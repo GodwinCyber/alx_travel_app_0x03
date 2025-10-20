@@ -1,46 +1,48 @@
-# Django Restful framework travel project
+# DPayment Integration with Chapa API
 
 ## Overview
-- This task guides learners through creating essential backend components in Django by defining database models, setting up serializers for API data representation, and implementing a management command to seed the database. By working on the duplicated alx_travel_app_0x00 project, learners will gain practical experience in structuring relational data, serializing it for API endpoints, and programmatically populating the database with sample data to simulate real-world application scenarios.
+- TThis task focuses on integrating the Chapa Payment Gateway into a Django-based travel booking application. Learners will implement secure payment initiation, verification, and status handling for bookings. The workflow covers creating models for payment tracking, API endpoints for initiating and verifying payments, and integrating background email notifications upon successful payment.ulating the database with sample data to simulate real-world application scenarios.
 
 ## Learning Objectives
 By the end of this task, learners should be able to:
 
-- __Model relational data__ in Django using appropriate fields, relationships, and constraints.
-- __Create serializers__ to transform Django model instances into JSON for API responses.
-- __Implement a management command__ to automate database seeding.
-- __Test and validate__ database population using Django’s command-line tools.
+- Configure and securely store API credentials for third-party payment gateways.
+- Create Django models to manage and track payment transactions.
+- Build API endpoints for payment initiation and verification.
+- Implement payment workflows integrated into a booking system.
+- Handle payment status updates and transaction logging.
+- Test payment flows using a sandbox environment.
 
 
 ## Learning Outcomes
-Learners will be able to:
+Upon completing this task, learners will be able to:
 
-- Define models such as Listing, Booking, and Review with correct relationships (e.g., ForeignKey, OneToMany).
-- Use Django REST Framework (DRF) serializers to prepare model data for APIs.
-- Write and execute a seeding script to insert realistic sample data into the database.
-- Apply database seeding to streamline development and testing workflows.
+- Successfully connect a Django application to the Chapa API.
+- Initiate payments and direct users to secure payment pages.
+- Send automated confirmation emails after successful transactions.
+- Demonstrate a fully functional and tested payment flow in a booking context.
 
 
 ## Key Concepts
-- __Django Models__ – Mapping Python classes to database tables.
-- __Relationships__ – Implementing one-to-many and many-to-one associations between models.
-- __Constraints__ – Ensuring data integrity with validation rules.
-- __Serializers__ – Converting complex data types into JSON for APIs using DRF.
-- __Management Commands__ – Extending Django’s CLI to perform custom tasks.
-- __Database Seeding__ – Populating databases with sample or default data.
+- __API Integration__ – Connecting Django with the Chapa API for payment processing.
+- __Secure Credential Management__ –Storing API keys in environment variables.
+- __Django Models__ – Structuring and persisting payment transaction data.
+- __HTTP Requests__ – Sending POST and GET requests to initiate and verify payments.
+- __Asynchronous Tasks__ – Using Celery for sending confirmation emails.
+- __Error Handling__ – Managing failed or incomplete payments gracefully.
 
 ## Tools & Libraries
 - __Django__ – Backend framework for building the application.
-- __Django REST Framework (DRF)__ – For creating API serializers and endpoints.
-- __SQLite/PostgreSQL__ – Database engines for storing data.
-- __Python__ – Programming language for backend logic and scripts.
+- __PostgreSQL__ – Database for persisting bookings and payment data.
+- __Chapa API__ – Payment gateway for initiating and verifying transactions.
+- __Requests__ – Python library for making API calls to Chapa.
+- __Celery__ – For background email sending after successful payment.
+- __dotenv__ – For managing environment variables securely.
 
 ## Real-World Use Case
-In a travel booking platform, developers need to design data structures for listings (properties available for booking), customer bookings, and user reviews. Serializers ensure this data can be delivered via APIs to mobile or web clients. During development, seeding the database with sample listings allows frontend developers and testers to work with realistic data without manually creating entries, significantly speeding up the development lifecycle and ensuring consistent test scenarios.
+Payment processing is a critical feature in online booking systems, e-commerce platforms, and subscription-based services. This task simulates integrating a __real-world payment gateway (Chapa)__ into a __travel booking application.__ The workflow mirrors industry standards, covering secure payment initiation, transaction tracking, verification, and automated communication, skills essential for professional backend development in fintech, travel, and e-commerce solutions.
 
 ## Additional Resources:
-- Check out the [Relationships in Django](https://www.freecodecamp.org/news/django-model-relationships/)
-- Check out the [Django Models Documentation](https://docs.djangoproject.com/en/5.2/ref/models/querysets/)
-- Check out the [Data Seeding & Initial Data](https://docs.djangoproject.com/en/5.2/howto/initial-data/)
-- Check out the [Using django-seed](https://pypi.org/project/django-seed/)
+- Check out the [Online Payment Gateway Integration: A Thorough Guide](https://medium.com/@vaniukov.s/online-payment-gateway-integration-a-thorough-guide-993c794b65b9)
+- Check out the [Integrating Payment Gateways in Django: A Guide for E-Commerce Projects](https://medium.com/@farad.dev/integrating-payment-gateways-in-django-a-guide-for-e-commerce-projects-40955226db98)
 
