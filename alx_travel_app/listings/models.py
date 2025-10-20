@@ -3,6 +3,12 @@ import uuid
 from django.contrib.auth.models import AbstractUser
 #from django.contrib.postgres.fields import ArrayField
 
+class STATUS_CHOICES(models.TextChoices):
+    '''Status for the choice of payment'''
+    PENDING = 'pending', 'Pending'
+    SUCCESS = 'success', 'Success'
+    FAILED = 'failed', 'Failed'
+
 # Create your models here.
 class USER_ROLE(models.TextChoices):
     '''Different roles a user can have'''
@@ -114,6 +120,19 @@ class Review(models.Model):
     def __str__(self):
         '''String that represents the review object'''
         return f'Review {self.review_id} for {self.listing.title} by {self.guest.email} - Rating: {self.rating}'
+    
+class Payment(models.Model):
+    '''Model representing a payment for booking'''
+    booking_reference = models.ForeignKey(Booking, on_delete=models.CASCADE, related_name='payments')
+    transaction_id = models.CharField(max_length=100, unique=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES.choices, default=STATUS_CHOICES.PENDING)
+    payment_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        '''String that represents the payment object'''
+        return f'Payment {self.transaction_id} for Booking {self.booking_reference.booking_id} - Amount: {self.amount} - Status: {self.status}'
+
     
 # End of models.py
 
