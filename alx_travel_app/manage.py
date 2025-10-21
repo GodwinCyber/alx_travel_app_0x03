@@ -1,4 +1,16 @@
 #!/usr/bin/env python
+
+from rest_framework import fields
+
+_old_init = fields.Field.__init__
+
+def patch_init(self, *args, **kwargs):
+    kwargs.pop('encoder', None)
+    kwargs.pop('decoder', None)
+    return _old_init(self, *args, **kwargs)
+
+fields.Field.__init__ = patch_init
+
 """Django's command-line utility for administrative tasks."""
 import os
 import sys

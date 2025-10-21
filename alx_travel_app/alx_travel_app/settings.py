@@ -10,9 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Chapa Scret Key
+CHAPA_SECRET_KEY = os.getenv('CHAPA_SECRET_KEY')
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,13 +34,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-SWAGGER_SETTINGS = {
-    'DEFAULT_FIELD_INSPECTORS': [
-        'alx_travel_app.utils.drf_yasg_patch.SkipEncoderInspector',  # custom inspector
-        'drf_yasg.inspectors.CamelCaseJSONFilter',
-        'drf_yasg.inspectors.RecursiveFieldInspector',
-        'drf_yasg.inspectors.RelatedFieldInspector',
-        'drf_yasg.inspectors.StringDefaultFieldInspector',
+
+# Application definition
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
     ],
 }
 
@@ -50,7 +61,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_seed',
     #'django.contrib.staticfiles',
-    'drf_yasg',
+    'drf_spectacular',
 
     # local apps
     'listings',

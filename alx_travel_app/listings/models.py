@@ -126,7 +126,7 @@ class Payment(models.Model):
     booking_reference = models.ForeignKey(Booking, on_delete=models.CASCADE, related_name='payments')
     transaction_id = models.CharField(max_length=100, unique=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES.choices, default=STATUS_CHOICES.PENDING)
+    payment_status = models.CharField(max_length=10, choices=STATUS_CHOICES.choices, default=STATUS_CHOICES.PENDING)
     payment_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

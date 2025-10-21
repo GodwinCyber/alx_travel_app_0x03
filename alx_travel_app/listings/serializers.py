@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Listing, Booking
+from .models import Listing, Booking, Payment
 
 
 class ListingSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class BookingSerializer(serializers.ModelSerializer):
     '''Serializer for the Booking model'''
     class Meta:
         model = Booking
-        fields = '__all__'
+        fields = ['booking_id', 'listing', 'guest', 'status', 'check_in', 'check_out', 'total_price', 'created_at']
         read_only_fields = ['booking_id', 'created_at', 'total_price']
 
     def create(self, validated_data):
@@ -25,4 +25,12 @@ class BookingSerializer(serializers.ModelSerializer):
         listing = validated_data['listing']
         validated_data['total_price'] = listing.price_per_night * nights
         return super().create(validated_data)
+    
+class PaymentSerializer(serializers.ModelSerializer):
+    '''Serializer for the Payment model'''
+    class Meta:
+        model = Payment
+        fields = '__all__'
+        read_only_fields = ['payment_date', 'transaction_id', 'payment_status']
+
 
