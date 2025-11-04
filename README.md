@@ -1,48 +1,46 @@
-# DPayment Integration with Chapa API
+# Setting Up Background Jobs for Email Notifications
 
 ## Overview
-- TThis task focuses on integrating the Chapa Payment Gateway into a Django-based travel booking application. Learners will implement secure payment initiation, verification, and status handling for bookings. The workflow covers creating models for payment tracking, API endpoints for initiating and verifying payments, and integrating background email notifications upon successful payment.ulating the database with sample data to simulate real-world application scenarios.
+- This task focuses on enhancing the alx_travel_app project by implementing asynchronous background processing using Celery with RabbitMQ as the message broker. The main feature added is an email notification system that sends booking confirmations without blocking the main request-response cycle. This ensures improved performance and a better user experience.
+
 
 ## Learning Objectives
-By the end of this task, learners should be able to:
+By completing this task, learners will:
 
-- Configure and securely store API credentials for third-party payment gateways.
-- Create Django models to manage and track payment transactions.
-- Build API endpoints for payment initiation and verification.
-- Implement payment workflows integrated into a booking system.
-- Handle payment status updates and transaction logging.
-- Test payment flows using a sandbox environment.
+- Understand how to integrate Celery with RabbitMQ in a Django application.
+- Learn to configure asynchronous task processing for improved performance
+- Implement an email notification feature triggered by user actions.
+- Gain experience in working with Django’s email backend for automated communications.
 
 
 ## Learning Outcomes
-Upon completing this task, learners will be able to:
+After completing this task, learners will be able to:
 
-- Successfully connect a Django application to the Chapa API.
-- Initiate payments and direct users to secure payment pages.
-- Send automated confirmation emails after successful transactions.
-- Demonstrate a fully functional and tested payment flow in a booking context.
+- Configure and run Celery with RabbitMQ as a message broker.
+- Create and manage shared tasks in Django using Celery.
+- Trigger Celery tasks from Django views or viewsets.
+- Test and verify asynchronous operations such as sending emails.
 
 
 ## Key Concepts
-- __API Integration__ – Connecting Django with the Chapa API for payment processing.
-- __Secure Credential Management__ –Storing API keys in environment variables.
-- __Django Models__ – Structuring and persisting payment transaction data.
-- __HTTP Requests__ – Sending POST and GET requests to initiate and verify payments.
-- __Asynchronous Tasks__ – Using Celery for sending confirmation emails.
-- __Error Handling__ – Managing failed or incomplete payments gracefully.
+- __Asynchronous Task Processing:__ – Running time-consuming tasks in the background.
+- __Message Broker:__ – Middleware (RabbitMQ) used to send and receive task messages between Django and Celery.
+- __Celery Configuration:__ – Setting up celery.py and integrating it into settings.py.
+- __Shared Tasks:__ – Functions decorated with @shared_task for execution by Celery workers.
+- __Email Backend in Django:__ – Configuring SMTP settings for sending automated emails.
 
 ## Tools & Libraries
 - __Django__ – Backend framework for building the application.
-- __PostgreSQL__ – Database for persisting bookings and payment data.
-- __Chapa API__ – Payment gateway for initiating and verifying transactions.
-- __Requests__ – Python library for making API calls to Chapa.
-- __Celery__ – For background email sending after successful payment.
-- __dotenv__ – For managing environment variables securely.
+- __Celery__ – Distributed task queue for background task execution.
+- __RabbitMQ__ – Message broker to handle communication between Django and Celery
+- __SMTP Email Backend__ – For sending booking confirmation emails.
 
 ## Real-World Use Case
-Payment processing is a critical feature in online booking systems, e-commerce platforms, and subscription-based services. This task simulates integrating a __real-world payment gateway (Chapa)__ into a __travel booking application.__ The workflow mirrors industry standards, covering secure payment initiation, transaction tracking, verification, and automated communication, skills essential for professional backend development in fintech, travel, and e-commerce solutions.
+n real-world travel or booking platforms like __Booking.com__ or __Airbnb__, sending booking confirmation emails instantly is critical but should not delay the user experience. Using __Celery__ with __RabbitMQ__, the email sending process can be offloaded to a background worker, ensuring users receive instant feedback while the system handles notifications asynchronously. This approach is scalable and can also be extended to other time-consuming tasks such as invoice generation, report creation, or SMS notifications.
 
 ## Additional Resources:
-- Check out the [Online Payment Gateway Integration: A Thorough Guide](https://medium.com/@vaniukov.s/online-payment-gateway-integration-a-thorough-guide-993c794b65b9)
-- Check out the [Integrating Payment Gateways in Django: A Guide for E-Commerce Projects](https://medium.com/@farad.dev/integrating-payment-gateways-in-django-a-guide-for-e-commerce-projects-40955226db98)
+- Check out the [What is a Message Queue?](https://aws.amazon.com/message-queue/)
+- Check out the [Everything about Celery](https://priyanshuguptaofficial.medium.com/everything-about-celery-b932c4c533af)
+- Check out the [RabbitMQ with Python: From Basics to Advanced Messaging Patterns (A Practical Guide)](https://medium.com/@sujakhu.umesh/rabbitmq-with-python-from-basics-to-advanced-messaging-patterns-a-practical-guide-18f8b43b94f8)
+- Check out the [Building a Sample Project Using Celery with Python](https://medium.com/h7w/building-a-sample-project-using-celery-with-python-a0135050aaa1)
 
