@@ -19,6 +19,7 @@ from django.conf import settings
 import requests
 import uuid
 from django.db import transaction
+from .tasks import send_booking_confirmation_email
 
 
 # Create your views here.
@@ -128,7 +129,15 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         '''Attach the currently authenticated user as the guest'''
-        serializer.save(guest=self.request.user)
+        booking = serializer.save(guest=self.request.user)
+        
+        # Trigger Celery task to send booking confirmation email
+        send_booking_confirmation_email.delay(
+            booking.guest.email,
+            booking.listing.title,
+            str(booking.start_date),
+            str(booking.end_date),
+        )
 
     @action(detail=False, methods=['get'])
     def my_bookings(self, request):
